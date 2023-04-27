@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Client Form</title>
+</head>
+<body>
+    <h1>Enter Clients Last Name</h1>
+    <form method="POST">
+        <label for="Enter Clients Last Name">Input:</label>
+        <input type="text" name="input">
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    {% if not_found %}
+    <h3>This client is new or has changed their name, press Add New Client to continue</h3>
+    <button value="">Add New Client</button>
+    {% endif %}
+    {% if results %}
+    <h3>If the client is in this list please Click the "Edit" button:</h3>
+    <style>
+        table {
+            width: 35%;
+        }
+
+        th {
+            text-align: left
+        }
+
+            th.key {
+                width: 1%
+            }
+
+            th.button {
+                width: 1%
+            }
+    </style>
+    <table>
+        <thead>
+            <tr>
+                <th>Key</th>
+                <th>Edit Client</th>
+                <th>Client Names</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in results %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td><button class="btn-view">Edit This Client</button></td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>If the client is NOT in the list, press Add New Client to continue</h3>
+    <button value="">Add New Client</button>
+    {% endif %}
+    <!-- Link to the script file -->
+    <script src="{{ url_for('static', filename='js/clienteditbutton.js') }}"></script>
+</body>
+</html>
